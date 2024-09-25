@@ -1,9 +1,6 @@
-package Model;
+package com.example.GestionInventario.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -18,11 +15,15 @@ public class Movimientos {
 
     private int cantidad;
 
-    private enum tipo_movimiento{
-        Entrada, Salida
-    }
+    @Enumerated (EnumType.STRING)
+    private TipoMovimiento tipoMovimiento;
 
     private LocalDateTime fecha;
+
+    // Enum para tipo_movimiento
+    public enum TipoMovimiento {
+        Entrada, Salida
+    }
 
     public int getId_movimientos() {
         return id_movimientos;
@@ -47,6 +48,15 @@ public class Movimientos {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public TipoMovimiento getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
+    public void setTipoMovimiento(TipoMovimiento tipoMovimiento) {
+        this.tipoMovimiento = tipoMovimiento;
+    }
+
 
     public LocalDateTime getFecha() {
         return fecha;
