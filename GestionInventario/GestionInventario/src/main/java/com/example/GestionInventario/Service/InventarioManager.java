@@ -37,18 +37,21 @@ public class InventarioManager {
     }
 
     // Actualizar Producto
-    public Productos updateProducto(Productos productoDetalles) {
-        return repositoryproductos.findById(idProducto).map(producto -> {
+    public Productos updateProducto(Long idProductos, Productos productoDetalles) {
+        return repositoryproductos.findById(idProductos).map(producto -> {
             producto.setNombre_producto(productoDetalles.getNombre_producto());
             producto.setDescripcion(productoDetalles.getDescripcion());
             producto.setPrecio(productoDetalles.getPrecio());
             return repositoryproductos.save(producto);
         }).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
     }
+    public Productos saveProducto (long id, Productos productos){
+        return repositoryproductos.save(productos);
+    }
 
     // Eliminar Producto
-    public void deleteProducto(Long idProducto) {
-        repositorymovimientos.deleteById(idProducto);
+    public void deleteProducto(Long id) {
+        repositorymovimientos.deleteById(id);
     }
 
     // CRUD para Movimientos
@@ -68,6 +71,8 @@ public class InventarioManager {
         return repositorymovimientos.findById(idMovimiento);
     }
 
+
+
     // Actualizar Movimiento
     public Movimientos updateMovimiento(Long idMovimiento, Movimientos movimientoDetalles) {
         return repositorymovimientos.findById(idMovimiento).map(movimiento -> {
@@ -78,9 +83,12 @@ public class InventarioManager {
             return repositorymovimientos.save(movimiento);
         }).orElseThrow(() -> new RuntimeException("Movimiento no encontrado"));
     }
+    public Movimientos saveMovimiento (Movimientos movimientos){
+        return repositorymovimientos.save(movimientos);
+    }
 
     // Eliminar Movimiento
-    public void deleteMovimiento(Long idMovimiento) {
-        repositorymovimientos.deleteById(idMovimiento);
+    public void deleteMovimiento(Long id) {
+        repositorymovimientos.deleteById(id);
     }
 }
